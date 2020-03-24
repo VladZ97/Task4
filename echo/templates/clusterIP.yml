@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.Name }}-ip
+spec:
+  selector:
+    app: {{ .Values.Name }}
+  ports:
+  - port: 80
+    targetPort: 3000
+#  type: ClusterIP

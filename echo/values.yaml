@@ -1,0 +1,10 @@
+Name: echo
+Image_Name: vovaz/echo
+App_Port: 3000
+Expose_Port: 80
+Default_Volume: config-volume
+Default_MountPath: /app/config
+loglevel: info
+persist: true
+mongodburl: mongodb://vov:1234@mongodb-primary-0.mongodb-headless:27017,mongodb-secondary-0.mongodb-headless:27017,mongodb-secondary-1.mongodb-headless:27017/echo?replicaSet=rs0
+Default_CacheClean: mongo mongodb://vov:1234@mongodb:27017/echo --eval "db.echos.remove({})"

@@ -1,0 +1,23 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: mongo-clear-db
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongo-clear-db
+            image: bitnami/mongodb:4.2.4-debian-10-r3
+            env:
+            - name: MONGO_CLEAR
+              valueFrom:
+                secretKeyRef:
+                  name: echo-conf
+                  key: clear_cache
+            command: [ "/bin/bash" , "-c"]
+            args:
+              - $(MONGO_CLEAR)
+          restartPolicy: OnFailure

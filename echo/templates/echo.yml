@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.Name }}-deployment
+  labels:
+    app: {{ .Values.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.Name }}
+    spec:
+      containers:
+      - name: {{ .Values.Name }}
+        image: {{ .Values.Image_Name }}
+        ports:
+        - containerPort: {{ .Values.App_Port }}
+        volumeMounts:
+        - name: {{ .Values.Default_Volume }}
+          mountPath: {{ .Values.Default_MountPath }}
+      volumes:
+      - name: {{ .Values.Default_Volume }}
+        secret:
+          secretName: {{ .Values.Name }}-conf
+          items:
+          - key: default
+            path: default.yaml
+

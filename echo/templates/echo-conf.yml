@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.Name }}-conf
+
+stringData:
+  default: |
+    port: {{ .Values.App_Port }}
+    loglevel: {{ .Values.loglevel }}
+    persist: {{ .Values.persist }}
+    mongodburl: {{ .Values.mongodburl }}
+  clear_cache: |
+    {{ .Values.Default_CacheClean }}
