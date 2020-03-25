@@ -1,10 +1,25 @@
+#Names
 Name: echo
 Image_Name: vovaz/echo
+
+#Ports
 App_Port: 3000
 Expose_Port: 80
+
+#Volumes
 Default_Volume: config-volume
 Default_MountPath: /app/config
+
+#Config for echo app
 loglevel: info
 persist: true
 mongodburl: mongodb://vov:1234@mongodb-primary-0.mongodb-headless:27017,mongodb-secondary-0.mongodb-headless:27017,mongodb-secondary-1.mongodb-headless:27017/echo?replicaSet=rs0
+
+#Command for cleanup cronjob
 Default_CacheClean: mongo mongodb://vov:1234@mongodb:27017/echo --eval "db.echos.remove({})"
+
+#Restrictions
+Min_Memory: 64Mi
+Max_Memory: 128Mi
+Min_cpu: 250m
+Max_cpu: 500m

@@ -21,6 +21,13 @@ spec:
         volumeMounts:
         - name: {{ .Values.Default_Volume }}
           mountPath: {{ .Values.Default_MountPath }}
+        resources:
+          requests:
+            memory: {{ .Values.Min_Memory }}
+            cpu: {{ .Values.Min_cpu }}
+          limits:
+            memory: {{ .Values.Max_Memory }}
+            cpu: {{ .Values.Max_cpu }}
       volumes:
       - name: {{ .Values.Default_Volume }}
         secret:
@@ -28,4 +35,5 @@ spec:
           items:
           - key: default
             path: default.yaml
+      
 
